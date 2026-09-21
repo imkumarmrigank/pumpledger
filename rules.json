@@ -1,0 +1,14 @@
+{
+  "_comment": "Keyword rules for bucketing an expense-line label into one of the ledger's named payment columns. Checked top-to-bottom, first match wins (case-insensitive regex, matched anywhere in the label). Anything that matches nothing stays in the residual 'Petty / other cash expense' bucket, which the sheet derives automatically as P-Exp = T-Exp minus the sum of the named columns — it is never entered by hand. Edit this file (or use the Rules tab in the app) to teach the system new vendor/driver names as you see them; changes apply to every day you re-run through the app.",
+  "columns": ["Bank", "PTM", "UPI", "T-Sale", "Fleet", "R-Babu", "Ranjit", "Others"],
+  "rules": {
+    "Bank": ["bank\\s*jama", "bank\\s*deposit", "\\bbank\\b"],
+    "PTM": ["paytm"],
+    "UPI": ["\\bupi\\b", "\\bapi\\s*sbi\\b"],
+    "T-Sale": ["tank\\s*sell", "hsdpc", "\\bt[- ]?sale\\b"],
+    "Fleet": ["\\bfleet\\b"],
+    "R-Babu": ["rajeshwar", "\\bbabu\\b"],
+    "Ranjit": ["ranj(ee|i)t", "sanjiv singh", "\\bsanju\\b"],
+    "Others": ["cyber return", "cyber fraud", "\\brefund\\b", "\\bcsp\\b", "\\bnitesh\\b"]
+  }
+}

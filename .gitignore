@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.DS_Store
+.env
+
+# local-only data: uploaded images/workbooks, generated exports, and the
+# JSON store used only when no DATABASE_URL is configured
+data/uploads/
+data/exports/
+data/workbook/
+data/store.json
+data/september_ground_truth.py

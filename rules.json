@@ -3,12 +3,12 @@
   "columns": ["Bank", "PTM", "UPI", "T-Sale", "Fleet", "R-Babu", "Ranjit", "Others"],
   "rules": {
     "Bank": ["bank\\s*jama", "bank\\s*deposit", "\\bbank\\b"],
-    "PTM": ["paytm"],
+    "PTM": ["paytm", "\\bptm\\b"],
     "UPI": ["\\bupi\\b", "\\bapi\\s*sbi\\b"],
-    "T-Sale": ["tank\\s*sell", "hsdpc", "\\bt[- ]?sale\\b"],
+    "T-Sale": ["tank\\w*\\s*sell", "tank\\w*\\s*sale", "hsdpc", "\\bt[- ]?sale\\b"],
     "Fleet": ["\\bfleet\\b"],
     "R-Babu": ["rajeshwar", "\\bbabu\\b"],
     "Ranjit": ["ranj(ee|i)t", "sanjiv singh", "\\bsanju\\b"],
-    "Others": ["cyber return", "cyber fraud", "\\brefund\\b", "\\bcsp\\b", "\\bnitesh\\b"]
+    "Others": ["cyber return", "cyber fraud", "\\brefund\\b", "\\bcsp\\b", "\\bnitesh\\b", "\\bothers\\b"]
   }
 }

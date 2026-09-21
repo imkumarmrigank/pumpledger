@@ -165,9 +165,17 @@ def _ocr_lines(image: Image.Image, psm: int) -> list[str]:
     return [ln.rstrip() for ln in text.split('\n')]
 
 
-def extract(image_path: str) -> ExtractedVoucher:
-    path = Path(image_path)
-    im = Image.open(path).convert('L')
+def extract(image_path: str | bytes, source_label: str | None = None) -> ExtractedVoucher:
+    """image_path: a file path, OR raw image bytes (e.g. read from a DB blob
+    or an upload buffer) — pass source_label to name it in that case."""
+    if isinstance(image_path, (bytes, bytearray)):
+        import io
+        im = Image.open(io.BytesIO(image_path)).convert('L')
+        path_str = source_label or 'uploaded'
+    else:
+        path = Path(image_path)
+        im = Image.open(path).convert('L')
+        path_str = str(path)
     w, h = im.size
     scale = 2 if max(w, h) < 1400 else 1
     im2 = im.resize((w * scale, h * scale), Image.LANCZOS) if scale != 1 else im
@@ -343,7 +351,7 @@ def extract(image_path: str) -> ExtractedVoucher:
             expense_lines.append(ExpenseLine(label=label, amount=nums[-1], raw=raw_line))
 
     return ExtractedVoucher(
-        source_path=str(path),
+        source_path=path_str,
         date_str=date_str,
         opening_cash=opening_cash,
         hsd_unit=hsd_unit, hsd_rate=hsd_rate, hsd_amount=hsd_amount,
